@@ -3,198 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRM Growth Assessment</title>
+<title>Unlock Your Clinic’s Hidden Revenue</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:'Inter',sans-serif;
-  background:linear-gradient(180deg,#eef2ff 0%, #f8fafc 100%);
+  background:linear-gradient(180deg,#f3ecef 0%, #f8f4f6 100%);
   min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  padding:40px 20px;
 }
-
-/* ---------- HEADER SECTION ---------- */
-
-.header{
-  width:100%;
-  max-width:900px;
-  text-align:center;
-  padding:60px 20px 40px 20px;
-}
-
-.header h1{
-  font-family:'Poppins',sans-serif;
-  font-size:32px;
-  color:#0f172a;
-  margin-bottom:15px;
-}
-
-.header p{
-  max-width:600px;
-  margin:auto;
-  font-size:16px;
-  color:#475569;
-  line-height:1.6;
-}
-
-.badges{
-  margin-top:20px;
-  font-size:14px;
-  color:#6366f1;
-  font-weight:500;
-}
-
-/* ---------- FORM CONTAINER ---------- */
 
 .wrapper{
   width:100%;
-  display:flex;
-  justify-content:center;
-  padding:0 20px 60px 20px;
+  max-width:900px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.header h1{
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  color:#3b2f3c;
+  margin-bottom:20px;
+}
+
+.header p{
+  font-size:18px;
+  color:#6b5c68;
+  line-height:1.6;
+  max-width:750px;
+  margin:auto;
+}
+
+.badges{
+  margin-top:18px;
+  font-size:16px;
+  color:#b76e79;
 }
 
 .container{
-  width:100%;
-  max-width:520px;
-  background:white;
-  border-radius:22px;
-  padding:26px 22px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.08);
+  background:rgba(255,255,255,0.95);
+  border-radius:26px;
+  padding:40px;
+  box-shadow:0 30px 60px rgba(183,110,121,0.12);
 }
-
-/* ---------- FORM STYLES ---------- */
 
 .progress-bar{
   height:6px;
-  background:#e2e8f0;
+  background:#f0e6ea;
   border-radius:20px;
-  margin:20px 0;
+  margin-bottom:30px;
   overflow:hidden;
 }
 
 .progress{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg,#6366f1,#8b5cf6);
-  transition:0.4s;
+  background:linear-gradient(90deg,#e88a9e,#f3b37a);
+  transition:.4s ease;
 }
 
+/* QUESTIONS */
 .question{
   display:none;
-  animation:fadeIn .3s ease;
+  animation:fadeSlide .4s ease;
 }
 
-.question.active{display:block}
+.question.active{
+  display:block;
+}
+
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateX(20px)}
+  to{opacity:1;transform:translateX(0)}
+}
 
 .question h2{
-  font-family:'Poppins',sans-serif;
-  font-size:16px;
-  margin-bottom:16px;
-  color:#0f172a;
-}
-
-input{
-  width:100%;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid #e2e8f0;
+  font-family:'Playfair Display',serif;
+  font-size:22px;
   margin-bottom:18px;
-  font-size:15px;
+  color:#3b2f3c;
 }
 
+/* OPTIONS */
 .option{
-  background:#f1f5f9;
+  background:#f9eef1;
   padding:14px;
-  border-radius:14px;
-  margin-bottom:10px;
+  border-radius:16px;
+  margin-bottom:12px;
   cursor:pointer;
   transition:.25s;
-  font-size:14px;
 }
 
-.option:hover{background:#e0e7ff}
-
+.option:hover{background:#f6dde3}
 .option.selected{
-  background:#6366f1;
+  background:linear-gradient(90deg,#e88a9e,#f3b37a);
   color:white;
 }
 
+/* BUTTON */
 button{
   width:100%;
-  padding:14px;
+  padding:16px;
   border:none;
-  border-radius:16px;
-  background:#6366f1;
+  border-radius:22px;
+  background:linear-gradient(90deg,#e88a9e,#f3b37a);
   color:white;
-  font-size:15px;
-  margin-top:8px;
+  font-size:18px;
   cursor:pointer;
+  box-shadow:0 8px 20px rgba(232,138,158,0.25);
 }
 
-button:hover{background:#4f46e5}
+/* CUSTOM DROPDOWN */
+.custom-select{
+  position:relative;
+  margin-bottom:20px;
+}
+
+.select-selected{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  border:1px solid #eadce1;
+  font-size:16px;
+  cursor:pointer;
+  text-align:left;
+}
+
+.select-options{
+  position:absolute;
+  width:100%;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  margin-top:8px;
+  display:none;
+  z-index:999;
+  max-height:260px;
+  overflow-y:auto;
+}
+
+.select-options div{
+  padding:16px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.select-options div:hover{
+  background:#f6dde3;
+}
+
+.select-options.show{
+  display:block;
+}
 
 .result{
   display:none;
   text-align:center;
+  margin-top:30px;
 }
 
 .result-box{
-  background:#f8fafc;
-  padding:18px;
-  border-radius:16px;
-  margin-top:15px;
+  background:#fff7fa;
+  padding:22px;
+  border-radius:20px;
+  margin-bottom:20px;
   text-align:left;
-  font-size:14px;
 }
 
-.cta-button{
-  margin-top:25px;
-  background:#10b981;
+.cta{
+  margin-top:20px;
+  background:linear-gradient(90deg,#b76e79,#e88a9e);
 }
 
-.cta-button:hover{
-  background:#059669;
-}
-
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width:480px){
-  .header h1{font-size:24px}
-  .header p{font-size:14px}
+/* MOBILE */
+@media(max-width:768px){
+  body{padding:20px 15px;}
+  .header h1{font-size:26px;}
+  .header p{font-size:15px;}
+  .container{padding:25px;}
+  .select-selected{padding:20px;font-size:17px;}
+  .select-options div{padding:18px;font-size:17px;}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER CONTENT -->
+<div class="wrapper">
 
 <div class="header">
-  <h1>Unlock Hidden Revenue in Your Business</h1>
-  <p>
-    Most clinics and service businesses are unknowingly losing 20–40% of their potential revenue 
-    due to missed follow-ups, no-shows, poor automation, and weak tracking systems. 
-    This quick assessment will show you exactly where growth is leaking — and how structured CRM automation can double it.
-  </p>
-  <div class="badges">
-    ✔ Takes 90 Seconds &nbsp; • &nbsp; ✔ Instant Revenue Insight &nbsp; • &nbsp; ✔ No Signup Required
-  </div>
+<h1>Recover Lost Bookings & Revenue in Your Medspa</h1>
+<p>
+    Missed follow-ups, no-shows, and manual admin are quietly costing your clinic thousands every month.
+
+    This quick 60-second assessment shows you exactly where revenue is slipping — and how much you could recover with better automation.
+</p>
+<div class="badges">
+❤ Takes 90 Seconds &nbsp; • &nbsp; ❤ Instant Revenue Insight
+</div>
 </div>
 
-<!-- FORM CENTERED -->
-
-<div class="wrapper">
 <div class="container">
 
 <div class="progress-bar"><div class="progress" id="progress"></div></div>
@@ -204,70 +221,104 @@ button:hover{background:#4f46e5}
 <!-- Q1 -->
 <div class="question active">
 <h2>Q1) How many new consultation requests do you receive per month?</h2>
-<input type="number" id="leads" placeholder="consultation requests/month">
+
+<div class="custom-select" data-target="leads">
+  <div class="select-selected">Select range</div>
+  <div class="select-options">
+    <div data-value="25">0 - 25</div>
+    <div data-value="50">26 - 50</div>
+    <div data-value="100">51 - 100</div>
+    <div data-value="200">101 - 200</div>
+    <div data-value="400">200+</div>
+  </div>
+</div>
+
+<input type="hidden" id="leads">
 <button type="button" onclick="next()">Next</button>
 </div>
 
 <!-- Q2 -->
 <div class="question">
 <h2>Q2) What percentage of leads do you follow up with within 24 hours?</h2>
-<div class="option" data-value="0.25">Less than 25% - We struggle to follow up</div>
-<div class="option" data-value="0.50">25-50% - We follow up when we can</div>
-<div class="option" data-value="0.75">50-75% - We have a system but it's manual</div>
-<div class="option" data-value="0.90">75%+ - We have automated follow-up</div>
+<div class="option" data-follow="0.25">Less than 25% - We struggle to follow up</div>
+<div class="option" data-follow="0.50">25-50% - We follow up when we can</div>
+<div class="option" data-follow="0.75">50-75% - We have a system but it's manual</div>
+<div class="option" data-follow="0.90">75%+ - We have automated follow-up</div>
 <button type="button" onclick="next()">Next</button>
 </div>
 
 <!-- Q3 -->
 <div class="question">
 <h2>Q3) What's your current no-show rate for appointments?</h2>
-<div class="option" data-value="0.40">40%+ - Major problem, losing lots of revenue</div>
-<div class="option" data-value="0.30">25-40% - Significant issue</div>
-<div class="option" data-value="0.20">15-25% - It happens occasionally</div>
-<div class="option" data-value="0.10">Less than 15% - We send reminders consistently</div>
+<div class="option" data-noshow="0.40">40%+ - Major problem, losing lots of revenue</div>
+<div class="option" data-noshow="0.30">25-40% - Significant issue</div>
+<div class="option" data-noshow="0.20">15-25% - It happens occasionally</div>
+<div class="option" data-noshow="0.10">Less than 15% - We send reminders consistently</div>
 <button type="button" onclick="next()">Next</button>
 </div>
 
 <!-- Q4 -->
 <div class="question">
 <h2>Q4) How many appointments do you complete per month?</h2>
-<input type="number" id="completed" placeholder="completed appointments/month">
+
+<div class="custom-select" data-target="completed">
+  <div class="select-selected">Select range</div>
+  <div class="select-options">
+    <div data-value="20">0 - 20</div>
+    <div data-value="50">21 - 50</div>
+    <div data-value="100">51 - 100</div>
+    <div data-value="200">100+</div>
+  </div>
+</div>
+
+<input type="hidden" id="completed">
 <button type="button" onclick="next()">Next</button>
 </div>
 
 <!-- Q5 -->
 <div class="question">
 <h2>Q5)  How often do you ask for reviews after successful treatments?</h2>
-<div class="option">Never - We don't have a process</div>
-<div class="option">Rarely - Only when we remember</div>
-<div class="option">Sometimes - Manual requests</div>
-<div class="option">Always - Automated review requests</div>
+<div class="option" data-review="0">Never - We don't have a process</div>
+<div class="option" data-review="0.05">Rarely - Only when we remember</div>
+<div class="option" data-review="0.10">Sometimes - Manual requests</div>
+<div class="option" data-review="0.15">Always - Automated review requests</div>
 <button type="button" onclick="next()">Next</button>
 </div>
 
 <!-- Q6 -->
 <div class="question">
 <h2>Q6) How would you rate your current website and online presence?</h2>
-<div class="option">Weak - Outdated or no website, minimal social media</div>
-<div class="option">Moderate - Basic website, occasional social posts</div>
-<div class="option">Good - Professional site, active social presence</div>
-<div class="option">Excellent - Optimized for bookings, strong online brand</div>
+<div class="option" data-conversion="0">Weak - Outdated or no website, minimal social media</div>
+<div class="option" data-conversion="0.05">Moderate - Basic website, occasional social posts</div>
+<div class="option" data-conversion="0.10">Good - Professional site, active social presence</div>
+<div class="option" data-conversion="0.20">Excellent - Optimized for bookings, strong online brand</div>
 <button type="button" onclick="next()">Next</button>
 </div>
 
 <!-- Q7 -->
 <div class="question">
 <h2>Q7)  Do you track lifetime value of your clients?</h2>
-<div class="option">No - We don't track client value</div>
-<div class="option">Manually - We estimate but don't have exact data</div>
-<div class="option">Yes - We have a system that tracks this automatically</div>
+<div class="option" data-ltv="0">No - We don't track client value</div>
+<div class="option" data-ltv="0.10">Manually - We estimate but don't have exact data</div>
+<div class="option" data-ltv="0.20">Yes - We have a system that tracks this automatically</div>
 <button type="button" onclick="next()">Next</button>
 </div>
 
 <!-- Q8 -->
 <div class="question">
 <h2>Q8) What's your average revenue per client visit?</h2>
-<input type="number" id="revenue" placeholder="dollars per visit">
+
+<div class="custom-select" data-target="revenue">
+  <div class="select-selected">Select range</div>
+  <div class="select-options">
+    <div data-value="75">$0 - $75</div>
+    <div data-value="150">$76 - $150</div>
+    <div data-value="300">$151 - $300</div>
+    <div data-value="500">$300+</div>
+  </div>
+</div>
+
+<input type="hidden" id="revenue">
 <button type="button" onclick="calculate()">See Results</button>
 </div>
 
@@ -277,8 +328,10 @@ button:hover{background:#4f46e5}
 <h2>Your Revenue Snapshot</h2>
 <div class="result-box" id="summary"></div>
 <canvas id="chart"></canvas>
-<h2 style="margin-top:20px;">Using Our CRM, Your Growth Will Be 2X 🚀</h2>
-<button class="cta-button">Schedule a Call With Us</button>
+<h2 style="margin-top:20px;font-family:'Playfair Display',serif;">
+Using Our CRM, Your Growth Will Be At Least 2X 🚀
+</h2>
+<button class="cta">Schedule a Call With Us</button>
 </div>
 
 </div>
@@ -289,36 +342,78 @@ let current=0;
 const questions=document.querySelectorAll(".question");
 const progress=document.getElementById("progress");
 
+let followRate=0.5,noShow=0.25,reviewBoost=0,conversionBoost=0,ltvBoost=0;
+
+/* Question Navigation */
+function next(){
+const active=questions[current];
+const hiddenInput=active.querySelector("input[type='hidden']");
+const selectedOption=active.querySelector(".selected");
+
+if(hiddenInput && !hiddenInput.value) return alert("Please select an option");
+if(!hiddenInput && !selectedOption) return alert("Please select an option");
+
+active.classList.remove("active");
+current++;
+questions[current].classList.add("active");
+progress.style.width=(current/8)*100+"%";
+}
+
+/* Options */
 document.querySelectorAll(".option").forEach(opt=>{
 opt.addEventListener("click",function(){
 this.parentElement.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
 this.classList.add("selected");
+
+if(this.dataset.follow) followRate=parseFloat(this.dataset.follow);
+if(this.dataset.noshow) noShow=parseFloat(this.dataset.noshow);
+if(this.dataset.review) reviewBoost=parseFloat(this.dataset.review);
+if(this.dataset.conversion) conversionBoost=parseFloat(this.dataset.conversion);
+if(this.dataset.ltv) ltvBoost=parseFloat(this.dataset.ltv);
 });
 });
 
-function next(){
-const active=questions[current];
-const input=active.querySelector("input");
-const selected=active.querySelector(".selected");
+/* Custom Dropdown */
+document.querySelectorAll('.custom-select').forEach(select=>{
+const selected=select.querySelector('.select-selected');
+const options=select.querySelector('.select-options');
+const targetId=select.dataset.target;
+const hiddenInput=document.getElementById(targetId);
 
-if(input && !input.value) return alert("Please fill this field");
-if(!input && !selected) return alert("Please select an option");
+selected.addEventListener('click',()=>{
+options.classList.toggle('show');
+});
 
-current++;
-progress.style.width=(current/questions.length)*100+"%";
+options.querySelectorAll('div').forEach(option=>{
+option.addEventListener('click',()=>{
+selected.textContent=option.textContent;
+hiddenInput.value=option.dataset.value;
+options.classList.remove('show');
+});
+});
 
-if(current<questions.length){
-questions[current-1].classList.remove("active");
-questions[current].classList.add("active");
+document.addEventListener('click',e=>{
+if(!select.contains(e.target)){
+options.classList.remove('show');
 }
-}
+});
+});
 
+/* Calculation */
 function calculate(){
+const leads=parseFloat(document.getElementById("leads").value);
 const completed=parseFloat(document.getElementById("completed").value);
 const revenue=parseFloat(document.getElementById("revenue").value);
 
 const currentRevenue=completed*revenue;
-const optimizedRevenue=currentRevenue*2;
+
+let optimizedLeads=leads*(1+reviewBoost)*(1+conversionBoost);
+let optimizedAppointments=optimizedLeads*0.90*(1-0.10);
+let optimizedRevenue=optimizedAppointments*revenue*(1+ltvBoost);
+
+if(optimizedRevenue < currentRevenue*2){
+optimizedRevenue=currentRevenue*2;
+}
 
 document.getElementById("form").style.display="none";
 document.getElementById("result").style.display="block";
@@ -326,7 +421,7 @@ document.getElementById("result").style.display="block";
 document.getElementById("summary").innerHTML=`
 <strong>Current Monthly Revenue:</strong> $${currentRevenue.toFixed(0)}<br><br>
 <strong>Projected Revenue With CRM:</strong> $${optimizedRevenue.toFixed(0)}<br><br>
-<strong>Growth Increase:</strong> 2X
+<strong>Growth Increase:</strong> ${(optimizedRevenue/currentRevenue).toFixed(1)}X
 `;
 
 new Chart(document.getElementById("chart"),{
@@ -335,13 +430,11 @@ data:{
 labels:["Current Revenue","With Our CRM"],
 datasets:[{
 data:[currentRevenue,optimizedRevenue],
-borderRadius:10
+backgroundColor:["#e88a9e","#b76e79"],
+borderRadius:12
 }]
 },
-options:{
-plugins:{legend:{display:false}},
-responsive:true
-}
+options:{plugins:{legend:{display:false}}}
 });
 }
 </script>
