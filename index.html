@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Growth Assessment</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#eef2ff 0%, #f8fafc 100%);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* ---------- HEADER SECTION ---------- */
+
+.header{
+  width:100%;
+  max-width:900px;
+  text-align:center;
+  padding:60px 20px 40px 20px;
+}
+
+.header h1{
+  font-family:'Poppins',sans-serif;
+  font-size:32px;
+  color:#0f172a;
+  margin-bottom:15px;
+}
+
+.header p{
+  max-width:600px;
+  margin:auto;
+  font-size:16px;
+  color:#475569;
+  line-height:1.6;
+}
+
+.badges{
+  margin-top:20px;
+  font-size:14px;
+  color:#6366f1;
+  font-weight:500;
+}
+
+/* ---------- FORM CONTAINER ---------- */
+
+.wrapper{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  padding:0 20px 60px 20px;
+}
+
+.container{
+  width:100%;
+  max-width:520px;
+  background:white;
+  border-radius:22px;
+  padding:26px 22px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+/* ---------- FORM STYLES ---------- */
+
+.progress-bar{
+  height:6px;
+  background:#e2e8f0;
+  border-radius:20px;
+  margin:20px 0;
+  overflow:hidden;
+}
+
+.progress{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#6366f1,#8b5cf6);
+  transition:0.4s;
+}
+
+.question{
+  display:none;
+  animation:fadeIn .3s ease;
+}
+
+.question.active{display:block}
+
+.question h2{
+  font-family:'Poppins',sans-serif;
+  font-size:16px;
+  margin-bottom:16px;
+  color:#0f172a;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid #e2e8f0;
+  margin-bottom:18px;
+  font-size:15px;
+}
+
+.option{
+  background:#f1f5f9;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:10px;
+  cursor:pointer;
+  transition:.25s;
+  font-size:14px;
+}
+
+.option:hover{background:#e0e7ff}
+
+.option.selected{
+  background:#6366f1;
+  color:white;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:16px;
+  background:#6366f1;
+  color:white;
+  font-size:15px;
+  margin-top:8px;
+  cursor:pointer;
+}
+
+button:hover{background:#4f46e5}
+
+.result{
+  display:none;
+  text-align:center;
+}
+
+.result-box{
+  background:#f8fafc;
+  padding:18px;
+  border-radius:16px;
+  margin-top:15px;
+  text-align:left;
+  font-size:14px;
+}
+
+.cta-button{
+  margin-top:25px;
+  background:#10b981;
+}
+
+.cta-button:hover{
+  background:#059669;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:480px){
+  .header h1{font-size:24px}
+  .header p{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER CONTENT -->
+
+<div class="header">
+  <h1>Unlock Hidden Revenue in Your Business</h1>
+  <p>
+    Most clinics and service businesses are unknowingly losing 20–40% of their potential revenue 
+    due to missed follow-ups, no-shows, poor automation, and weak tracking systems. 
+    This quick assessment will show you exactly where growth is leaking — and how structured CRM automation can double it.
+  </p>
+  <div class="badges">
+    ✔ Takes 90 Seconds &nbsp; • &nbsp; ✔ Instant Revenue Insight &nbsp; • &nbsp; ✔ No Signup Required
+  </div>
+</div>
+
+<!-- FORM CENTERED -->
+
+<div class="wrapper">
+<div class="container">
+
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
+
+<form id="form">
+
+<!-- Q1 -->
+<div class="question active">
+<h2>Q1) How many new consultation requests do you receive per month?</h2>
+<input type="number" id="leads" placeholder="consultation requests/month">
+<button type="button" onclick="next()">Next</button>
+</div>
+
+<!-- Q2 -->
+<div class="question">
+<h2>Q2) What percentage of leads do you follow up with within 24 hours?</h2>
+<div class="option" data-value="0.25">Less than 25% - We struggle to follow up</div>
+<div class="option" data-value="0.50">25-50% - We follow up when we can</div>
+<div class="option" data-value="0.75">50-75% - We have a system but it's manual</div>
+<div class="option" data-value="0.90">75%+ - We have automated follow-up</div>
+<button type="button" onclick="next()">Next</button>
+</div>
+
+<!-- Q3 -->
+<div class="question">
+<h2>Q3) What's your current no-show rate for appointments?</h2>
+<div class="option" data-value="0.40">40%+ - Major problem, losing lots of revenue</div>
+<div class="option" data-value="0.30">25-40% - Significant issue</div>
+<div class="option" data-value="0.20">15-25% - It happens occasionally</div>
+<div class="option" data-value="0.10">Less than 15% - We send reminders consistently</div>
+<button type="button" onclick="next()">Next</button>
+</div>
+
+<!-- Q4 -->
+<div class="question">
+<h2>Q4) How many appointments do you complete per month?</h2>
+<input type="number" id="completed" placeholder="completed appointments/month">
+<button type="button" onclick="next()">Next</button>
+</div>
+
+<!-- Q5 -->
+<div class="question">
+<h2>Q5)  How often do you ask for reviews after successful treatments?</h2>
+<div class="option">Never - We don't have a process</div>
+<div class="option">Rarely - Only when we remember</div>
+<div class="option">Sometimes - Manual requests</div>
+<div class="option">Always - Automated review requests</div>
+<button type="button" onclick="next()">Next</button>
+</div>
+
+<!-- Q6 -->
+<div class="question">
+<h2>Q6) How would you rate your current website and online presence?</h2>
+<div class="option">Weak - Outdated or no website, minimal social media</div>
+<div class="option">Moderate - Basic website, occasional social posts</div>
+<div class="option">Good - Professional site, active social presence</div>
+<div class="option">Excellent - Optimized for bookings, strong online brand</div>
+<button type="button" onclick="next()">Next</button>
+</div>
+
+<!-- Q7 -->
+<div class="question">
+<h2>Q7)  Do you track lifetime value of your clients?</h2>
+<div class="option">No - We don't track client value</div>
+<div class="option">Manually - We estimate but don't have exact data</div>
+<div class="option">Yes - We have a system that tracks this automatically</div>
+<button type="button" onclick="next()">Next</button>
+</div>
+
+<!-- Q8 -->
+<div class="question">
+<h2>Q8) What's your average revenue per client visit?</h2>
+<input type="number" id="revenue" placeholder="dollars per visit">
+<button type="button" onclick="calculate()">See Results</button>
+</div>
+
+</form>
+
+<div class="result" id="result">
+<h2>Your Revenue Snapshot</h2>
+<div class="result-box" id="summary"></div>
+<canvas id="chart"></canvas>
+<h2 style="margin-top:20px;">Using Our CRM, Your Growth Will Be 2X 🚀</h2>
+<button class="cta-button">Schedule a Call With Us</button>
+</div>
+
+</div>
+</div>
+
+<script>
+let current=0;
+const questions=document.querySelectorAll(".question");
+const progress=document.getElementById("progress");
+
+document.querySelectorAll(".option").forEach(opt=>{
+opt.addEventListener("click",function(){
+this.parentElement.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
+this.classList.add("selected");
+});
+});
+
+function next(){
+const active=questions[current];
+const input=active.querySelector("input");
+const selected=active.querySelector(".selected");
+
+if(input && !input.value) return alert("Please fill this field");
+if(!input && !selected) return alert("Please select an option");
+
+current++;
+progress.style.width=(current/questions.length)*100+"%";
+
+if(current<questions.length){
+questions[current-1].classList.remove("active");
+questions[current].classList.add("active");
+}
+}
+
+function calculate(){
+const completed=parseFloat(document.getElementById("completed").value);
+const revenue=parseFloat(document.getElementById("revenue").value);
+
+const currentRevenue=completed*revenue;
+const optimizedRevenue=currentRevenue*2;
+
+document.getElementById("form").style.display="none";
+document.getElementById("result").style.display="block";
+
+document.getElementById("summary").innerHTML=`
+<strong>Current Monthly Revenue:</strong> $${currentRevenue.toFixed(0)}<br><br>
+<strong>Projected Revenue With CRM:</strong> $${optimizedRevenue.toFixed(0)}<br><br>
+<strong>Growth Increase:</strong> 2X
+`;
+
+new Chart(document.getElementById("chart"),{
+type:"bar",
+data:{
+labels:["Current Revenue","With Our CRM"],
+datasets:[{
+data:[currentRevenue,optimizedRevenue],
+borderRadius:10
+}]
+},
+options:{
+plugins:{legend:{display:false}},
+responsive:true
+}
+});
+}
+</script>
+
+</body>
+</html>
