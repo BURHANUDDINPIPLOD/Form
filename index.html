@@ -182,7 +182,7 @@ button{
 
 .cta{
   margin-top:20px;
-  background:linear-gradient(90deg,#b76e79,#e88a9e);
+  background:linear-gradient(90deg,#b76e6e,#e88a9e);
 }
 
 /* MOBILE */
@@ -203,9 +203,7 @@ button{
 <div class="header">
 <h1>Recover Lost Bookings & Revenue in Your Medspa</h1>
 <p>
-    Missed follow-ups, no-shows, and manual admin are quietly costing your clinic thousands every month.
-
-    This quick 60-second assessment shows you exactly where revenue is slipping — and how much you could recover with better automation.
+  Missed follow-ups, no-shows, and manual admin are quietly costing your clinic thousands every month.
 </p>
 <div class="badges">
 ❤ Takes 90 Seconds &nbsp; • &nbsp; ❤ Instant Revenue Insight
@@ -430,7 +428,10 @@ data:{
 labels:["Current Revenue","With Our CRM"],
 datasets:[{
 data:[currentRevenue,optimizedRevenue],
-backgroundColor:["#e88a9e","#b76e79"],
+backgroundColor:[
+  "#e53935",   // 🔴 Red for Current Revenue
+  "#2e7d32"    // 🟢 Green for CRM Revenue
+],
 borderRadius:12
 }]
 },
